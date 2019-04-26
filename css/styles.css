@@ -3,7 +3,7 @@
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+	font-size: 1em;
 	color: #333;
 	line-height: 1.5;
 }
@@ -31,6 +31,15 @@ a img{
 h1, h2, h3, h4, h5, h6 {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 0 20px;
+}
+
+h1.main-title{
+  margin: auto auto;
+}
+
+h1.main-title a {
+  font-size: 1.8em;
+  padding: 20px;
 }
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -125,7 +134,7 @@ nav h1 a {
   height: 35px;
   letter-spacing: 0;
   margin: 10px;
-  padding: 0 10px;
+  padding: 0 20px;
   width: 200px;
 }
 
@@ -133,9 +142,11 @@ nav h1 a {
 #restaurants-list {
   background-color: #f3f3f3;
   list-style: outside none none;
-  margin: 0;
-  padding: 30px 15px 60px;
+  margin: 0 auto;
+  padding: 30px 15px auto;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 #restaurants-list li {
   background-color: #fff;
@@ -272,4 +283,20 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+/*MEDIA QUERIES */
+@media screen and (max-width: 400px) {
+  #restaurants-list {
+    background-color: #f3f3f3;
+    list-style: outside none none;
+    margin: 0;
+    padding: 30px 15px 60px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #restaurants-list li {
+    width: 90%;
+  }
 }

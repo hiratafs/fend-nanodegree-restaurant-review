@@ -1,6 +1,34 @@
 @charset "utf-8";
 /* CSS Document */
 
+/*MEDIA QUERIES */
+@media screen and (max-width: 400px) {
+
+  nav {
+    padding: 20px;
+  }
+
+  header{ 
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 0.8rem;
+  }
+
+  #restaurants-list {
+    text-align: center;
+    padding: 0px 0px; 
+    display: flex;
+    justify-content: center;
+  }
+
+  #restaurants-list li {
+    max-width: 270px;
+
+  }
+}
+
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1em;
@@ -37,10 +65,6 @@ h1.main-title{
   margin: auto auto;
 }
 
-h1.main-title a {
-  font-size: 1.8em;
-  padding: 20px;
-}
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -73,6 +97,7 @@ nav h1 a {
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
+  padding: 15px;
 }
 #breadcrumb {
     padding: 10px 40px 16px;
@@ -115,27 +140,33 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
-  height: 50px;
+  height: 70;
   background-color: #3397DB;
   align-items: center;
+  overflow: auto;
 }
 .filter-options h2 {
+  float: left;
   color: white;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1;
-  margin: 0 20px;
+  margin: 20px 20px;
+  padding: 10px;
 }
 .filter-options select {
+  float: left;
   background-color: white;
   border: 1px solid #fff;
   font-family: Arial,sans-serif;
   font-size: 11pt;
   height: 35px;
   letter-spacing: 0;
-  margin: 10px;
-  padding: 0 20px;
+  margin: 15px 10px;
+  padding: 0 10px;
   width: 200px;
+  display: flex;
+  flex: auto;
 }
 
 /* ====================== Restaurant Listing ====================== */
@@ -143,7 +174,7 @@ nav h1 a {
   background-color: #f3f3f3;
   list-style: outside none none;
   margin: 0 auto;
-  padding: 30px 15px auto;
+  padding: 30px auto;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -154,7 +185,7 @@ nav h1 a {
   font-family: Arial,sans-serif;
   margin: 15px;
   min-height: 380px;
-  padding: 0 30px 25px;
+  padding: 25px 30px 25px;
   text-align: left;
   width: 270px;
 }
@@ -285,18 +316,3 @@ nav h1 a {
   color: #666;
 }
 
-/*MEDIA QUERIES */
-@media screen and (max-width: 400px) {
-  #restaurants-list {
-    background-color: #f3f3f3;
-    list-style: outside none none;
-    margin: 0;
-    padding: 30px 15px 60px;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  #restaurants-list li {
-    width: 90%;
-  }
-}

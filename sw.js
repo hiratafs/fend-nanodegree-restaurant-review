@@ -1,4 +1,5 @@
-const nomeCache = "versaocache"
+/* Versão do cache e array contendo os recursos para o cache*/
+const staticCacheName = "restaurant-review-v1";
 
 const cacherecursos = [
     './',
@@ -24,26 +25,35 @@ const cacherecursos = [
 ];
 
 self.addEventListener('install', function(e) {
-
     e.waitUntil(
-        caches.open(nomeCache).then(function(cache) {
+        caches.open(staticCacheName).then(function(cache) {
             console.log("Cache funcionando!");
-            cache.addAll(cacherecursos);
-         });
-         console.log("[service worker] installed");
-
+            return cache.addAll(cacherecursos);
+        }),
     )
+})
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(
+        caches.keys().then(function(nomesCache) {
+            return Promise.all(
+                nomesCache.filter(function(versaoCache) {
+                    return versaoCache.startsWith('restaurant-') && versaoCache != staticCacheName;
+                }).map(function(versaoCache) {
+                    return cache.delete(versaoCache);
+                })
+            )
+        })
+    ) 
 });
 
-self.addEventListener('activate', function(e) {
-    console.log("[service worker] activated")
-    e.waitUntil(
-        caches.keys().then(function(nomeCache) {
-            return Promise.all()
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request).then(function(response) {
+            if(response) {
+                console.log(event.request.url);
+                return response;
+            }
         })
     )
-});
-
-self.addEventListener('fetch', function(e) {
-    console.log("[service worker] fetched")
 });

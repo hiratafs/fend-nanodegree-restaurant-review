@@ -24,10 +24,10 @@ const cacherecursos = [
     'https://fonts.googleapis.com/css?family=Rubik:400,400i,500,700,700i'
 ];
 
-self.addEventListener('install', function(e) {
-    e.waitUntil(
+self.addEventListener('install', function(event) {
+    event.waitUntil(
         caches.open(staticCacheName).then(function(cache) {
-            console.log("Cache funcionando!");
+            //console.log("Cache funcionando!");
             return cache.addAll(cacherecursos);
         }),
     )
@@ -53,9 +53,24 @@ self.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request).then(function(response) {
             if(response) {
-                console.log(event.request.url);
+                //console.log(event.request.url);
                 return response;
             }
+            const requestClone = event.request.clone();
+
+            return fetch(requestClone).then(function(response) {
+                if(!response.status || response.status !== 200) {
+                    return response;
+                }
+
+                const addResponseCache = response.clone();
+
+                caches.open(staticCacheName).then(function(cache) {
+                    cache.put(event.request, addResponseCache)
+                });
+
+                return response;
+            });
         })
     )
 });
